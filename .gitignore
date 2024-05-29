@@ -158,3 +158,50 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+main — копия.py
+main — копия (3).py
+main — копия (2).py
+Include/site/python3.12/pygame/surface.h
+Include/site/python3.12/pygame/simd_blitters.h
+Include/site/python3.12/pygame/scrap.h
+Include/site/python3.12/pygame/pygame.h
+Include/site/python3.12/pygame/pgplatform.h
+Include/site/python3.12/pygame/pgopengl.h
+Include/site/python3.12/pygame/pgcompat.h
+Include/site/python3.12/pygame/pgbufferproxy.h
+Include/site/python3.12/pygame/pgarrinter.h
+Include/site/python3.12/pygame/palette.h
+Include/site/python3.12/pygame/mixer.h
+Include/site/python3.12/pygame/mask.h
+Include/site/python3.12/pygame/include/sse2neon.h
+Include/site/python3.12/pygame/include/pygame_mixer.h
+Include/site/python3.12/pygame/include/pygame_mask.h
+Include/site/python3.12/pygame/include/pygame_freetype.h
+Include/site/python3.12/pygame/include/pygame_font.h
+Include/site/python3.12/pygame/include/pygame_bufferproxy.h
+Include/site/python3.12/pygame/include/pygame.h
+Include/site/python3.12/pygame/include/pgplatform.h
+Include/site/python3.12/pygame/include/pgimport.h
+Include/site/python3.12/pygame/include/pgcompat.h
+Include/site/python3.12/pygame/include/bitmask.h
+Include/site/python3.12/pygame/include/_pygame.h
+Include/site/python3.12/pygame/freetype.h
+Include/site/python3.12/pygame/font.h
+Include/site/python3.12/pygame/camera.h
+Include/site/python3.12/pygame/_surface.h
+Include/site/python3.12/pygame/_pygame.h
+Include/site/python3.12/pygame/_camera.h
+Include/site/python3.12/pygame/_blit_info.h
+Scripts/activate
+Scripts/activate.bat
+Scripts/Activate.ps1
+Scripts/deactivate.bat
+Scripts/f2py.exe
+Scripts/pip.exe
+Scripts/pip3.12.exe
+Scripts/pip3.exe
+Scripts/python.exe
+Scripts/pythonw.exe
+tic_tac_toe.wpr
+tic_tac_toe.wpu
+pyvenv.cfg
