@@ -3,11 +3,16 @@ let boxes = document.querySelectorAll(".box");
 let turn = "X";
 let isGameOver = false;
 
-boxes.forEach(e =>{
+boxes.forEach(e => {
+    
     e.innerHTML = ""
-    e.addEventListener("click", ()=>{
+    e.addEventListener("click", () => {
+        
         if(!isGameOver && e.innerHTML === ""){
             e.innerHTML = turn;
+            index_number = e.getAttribute("index");
+            console.log(index_number);
+            play(index_number);
             cheakWin();
             cheakDraw();
             changeTurn();
@@ -63,6 +68,29 @@ function cheakDraw(){
             document.querySelector("#play-again").style.display = "inline"
         }
     }
+}
+
+function play(index_number) {
+    axios({
+		method: "POST",
+		url: '/api/v1/game/',
+		data: {
+			cell_index: index_number,
+		 },
+		headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+	})
+		.then(function (response) {
+			//handle success
+		console.log("success")
+  })
+  .catch(function (response) {
+	  //handle error
+	  console.log("-------------------------------");
+
+    console.log(response);
+  });
 }
 
 document.querySelector("#play-again").addEventListener("click", ()=>{
