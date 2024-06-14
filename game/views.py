@@ -26,9 +26,13 @@ class apiView(APIView):
     
     def post(self, request):
         data = {}
-        user_cell = float(request.data.get('cell_index'))
-       
-        print(user_cell)
+        user_cell_vertical = int(request.data.get('cell_index').split(',')[0])
+        user_cell_horizontal = int(request.data.get('cell_index').split(',')[-1])
+        matrix1 = str(request.data.get('matrix'))
+        text = f'vertical: {user_cell_vertical}, horisontal: {user_cell_horizontal}'
+
+        print(matrix1)
+        print(text)
         
-        data['data_cpi'] = json.dumps(user_cell)
+        data['data_cell'] = json.dumps(text)
         return Response(data=data, status=201)     

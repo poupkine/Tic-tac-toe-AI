@@ -4,20 +4,21 @@ let turn = "X";
 let isGameOver = false;
 
 boxes.forEach(e => {
-    
+    // console.log(e.innerHTML);
     e.innerHTML = ""
     e.addEventListener("click", () => {
         
         if(!isGameOver && e.innerHTML === ""){
             e.innerHTML = turn;
             index_number = e.getAttribute("index");
-            console.log(index_number);
+            // console.log(index_number);
             play(index_number);
             cheakWin();
             cheakDraw();
             changeTurn();
         }
     })
+    
 })
 
 function changeTurn(){
@@ -71,11 +72,25 @@ function cheakDraw(){
 }
 
 function play(index_number) {
+    let cell_matrix = document.querySelectorAll(".box");
+    let backend_matrix = [];
+    cell_matrix.forEach(e => {
+        if (e.innerHTML === "X") {
+            backend_matrix.push(1);
+        } else if (e.innerHTML === "O") {
+            backend_matrix.push(2);
+        } else {
+            backend_matrix.push(0);
+        }
+    })
+    console.log(index_number);
+    console.log(backend_matrix);
     axios({
 		method: "POST",
 		url: '/api/v1/game/',
 		data: {
-			cell_index: index_number,
+            matrix: backend_matrix,
+            cell_index: index_number,
 		 },
 		headers: {
       'Content-Type': 'multipart/form-data'
