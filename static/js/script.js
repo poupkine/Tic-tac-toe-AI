@@ -3,24 +3,21 @@ let boxes = document.querySelectorAll(".box");
 let turn = "X";
 let isGameOver = false;
 
-boxes.forEach(e => {
-    // console.log(e.innerHTML);
-    e.innerHTML = ""
-    e.addEventListener("click", () => {
-        
-        if(!isGameOver && e.innerHTML === ""){
-            e.innerHTML = turn;
-            index_number = e.getAttribute("index");
-            // console.log(index_number);
-            play(index_number);
-            cheakWin();
-            cheakDraw();
-            changeTurn();
-        }
-    })
-    
-})
 
+if (!isGameOver && turn === "X") {
+    boxes.forEach(e => {
+        e.innerHTML = ""
+        e.addEventListener("click", () => {     
+            if (!isGameOver && e.innerHTML === "") {
+                e.innerHTML = turn;
+                index_number = e.getAttribute("index");
+                checkWin();
+                checkDraw();
+                play(index_number);
+            }
+        })
+    })
+}
 function changeTurn(){
     if(turn === "X"){
         turn = "O";
@@ -32,7 +29,7 @@ function changeTurn(){
     }
 }
 
-function cheakWin(){
+function checkWin(){
     let winConditions = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -56,7 +53,7 @@ function cheakWin(){
     }
 }
 
-function cheakDraw(){
+function checkDraw(){
     if(!isGameOver){
         let isDraw = true;
         boxes.forEach(e =>{
@@ -65,13 +62,14 @@ function cheakDraw(){
 
         if(isDraw){
             isGameOver = true;
-            document.querySelector("#results").innerHTML = "Draw";
+            document.querySelector("#results").innerHTML = "Nobody won";
             document.querySelector("#play-again").style.display = "inline"
         }
     }
 }
 
 function play(index_number) {
+    changeTurn();
     let cell_matrix = document.querySelectorAll(".box");
     let backend_matrix = [];
     cell_matrix.forEach(e => {
@@ -83,22 +81,44 @@ function play(index_number) {
             backend_matrix.push(0);
         }
     })
-    console.log(index_number);
-    console.log(backend_matrix);
     axios({
 		method: "POST",
 		url: '/api/v1/game/',
 		data: {
-            matrix: backend_matrix,
+            matrix: JSON.stringify(backend_matrix),
             cell_index: index_number,
 		 },
 		headers: {
       'Content-Type': 'multipart/form-data'
     },
 	})
-		.then(function (response) {
-			//handle success
-		console.log("success")
+        .then(function (response) {
+            let data = JSON.parse(response.data.new_state);
+            if (data) {
+                let cell_matrix = document.querySelectorAll(".box");
+                data.forEach((res, index) => {
+                    if (res === "0") {
+                        cell_matrix[index].innerHTML = ""
+                    } else if (res === "1") {
+                        cell_matrix[index].innerHTML = "X"
+                    } else if (res === "2") {
+                        cell_matrix[index].innerHTML = "O"
+                    }
+                })
+                console.log(data)
+                console.log("success")
+                checkWin();
+                checkDraw();
+                if (!isGameOver) {
+                    changeTurn();
+                } else {
+                    document.querySelector("#results").innerHTML = "You are looser!";
+                }
+            } else {
+                checkWin();
+                checkDraw();
+            }
+            
   })
   .catch(function (response) {
 	  //handle error
