@@ -1,2 +1,3 @@
-pygame
+Django
 numpy
+djangorestframework
